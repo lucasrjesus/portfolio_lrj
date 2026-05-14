@@ -1,6 +1,6 @@
 // src/components/sections/Contact.tsx
 // Formulário minimalista com inputs de linha simples e validação em tempo real
-import { useState, useRef, FormEvent } from 'react';
+import { useState, useRef, type FormEvent } from 'react';
 import { ArrowRight, Check } from 'lucide-react';
 import gsap from 'gsap';
 

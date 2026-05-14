@@ -1,6 +1,6 @@
 // src/components/terminal/Terminal.tsx
 // Terminal Interativo da Hero Section com comandos e easter eggs
-import { useState, useRef, useEffect, KeyboardEvent } from 'react';
+import { useState, useRef, useEffect, type KeyboardEvent } from 'react';
 import { COMMANDS, WELCOME_LINES } from './commands';
 import type { CommandResult } from '../../types';
 

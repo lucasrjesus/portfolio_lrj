@@ -1,6 +1,6 @@
 // src/components/layout/Footer.tsx
 // Rodapé limpo e minimalista com links de contato direto
-import { MessageSquare } from 'lucide-react';
+
 import { GithubIcon, LinkedinIcon } from '../ui/Icons';
 
 export function Footer() {

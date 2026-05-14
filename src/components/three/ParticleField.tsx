@@ -12,7 +12,7 @@ function Particles() {
   const { size } = useThree();
 
   // Gera posições aleatórias em esfera achatada
-  const { positions, velocities } = useMemo(() => {
+  const { positions } = useMemo(() => {
     const positions = new Float32Array(PARTICLE_COUNT * 3);
     const velocities = new Float32Array(PARTICLE_COUNT * 3);
     for (let i = 0; i < PARTICLE_COUNT; i++) {

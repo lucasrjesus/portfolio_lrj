@@ -1,6 +1,6 @@
 // src/components/sections/Projects.tsx
 // Bento Grid assimétrico com cards de projetos e reveal effect
-import { useState, useRef, MouseEvent } from 'react';
+import { useState, useRef, type MouseEvent } from 'react';
 import { ExternalLink } from 'lucide-react';
 import { GithubIcon } from '../ui/Icons';
 import { PROJECTS } from '../../data/projects';
