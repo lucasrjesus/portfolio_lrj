@@ -8,14 +8,19 @@ gsap.registerPlugin(ScrollTrigger);
 const AVATAR_URL = 'https://avatars.githubusercontent.com/u/179963444?v=4';
 
 export function About() {
-  const [stats, setStats] = useState({ followers: 0, repos: 0 });
+  const [stats, setStats] = useState({ followers: 2, repos: 15 });
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     fetch('https://api.github.com/users/lucasrjesus')
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) throw new Error('API Rate Limit or Error');
+        return res.json();
+      })
       .then(data => {
-        setStats({ followers: data.followers, repos: data.public_repos });
+        if (typeof data.followers === 'number' && typeof data.public_repos === 'number') {
+          setStats({ followers: data.followers, repos: data.public_repos });
+        }
       })
       .catch(console.error);
 
@@ -100,7 +105,7 @@ export function About() {
                 Meu GitHub
               </a>
               <a
-                href="/curriculo.pdf"
+                href="https://drive.google.com/drive/folders/1TBghfzLlLiZwPmvFHfNVy9nOErjMdPY_?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex-1 text-center py-3.5 text-white rounded-xl font-medium hover:opacity-90 transition-opacity shadow-sm"
