@@ -61,29 +61,34 @@ export function Contact() {
     setLoading(true);
     
     try {
-      const response = await fetch('https://formsubmit.co/ajax/lrj.lucasribeiro@gmail.com', {
+      // Usando Web3Forms como alternativa confiável, pois o FormSubmit.co está fora do ar
+      const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
         body: JSON.stringify({
-          Nome: form.name,
-          Email: form.email,
-          Mensagem: form.message,
-          _subject: `Novo contato de ${form.name} via Portfólio`,
-          _template: 'box'
+          // IMPORTANTE: O usuário precisa substituir esta chave!
+          access_key: 'COLOQUE_SUA_CHAVE_AQUI',
+          name: form.name,
+          email: form.email,
+          message: form.message,
+          subject: `Novo contato de ${form.name} via Portfólio`,
+          from_name: 'Portfólio Lucas Jesus'
         })
       });
 
-      if (!response.ok) {
-        throw new Error('Serviço indisponível');
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || 'Serviço indisponível');
       }
 
       setSubmitted(true);
     } catch (error) {
       console.error('Erro ao enviar email:', error);
-      alert('Não foi possível enviar a mensagem automaticamente no momento. Por favor, tente novamente mais tarde ou me contate no LinkedIn.');
+      alert('Não foi possível enviar a mensagem automaticamente. Lembre-se de colocar sua chave do Web3Forms no código!');
     } finally {
       setLoading(false);
     }
