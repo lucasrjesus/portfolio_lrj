@@ -61,23 +61,26 @@ export function Contact() {
     setLoading(true);
     
     try {
-      const response = await fetch('https://formspree.io/f/3f592411-b39a-42db-bf5f-023d0d4d90b0', {
+      const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
         body: JSON.stringify({
+          access_key: '3f592411-b39a-42db-bf5f-023d0d4d90b0',
           name: form.name,
           email: form.email,
           message: form.message,
+          subject: `Novo contato de ${form.name} via Portfólio`,
+          from_name: 'Portfólio Lucas Jesus'
         })
       });
 
       const data = await response.json();
 
-      if (!response.ok) {
-        throw new Error(data?.errors?.[0]?.message || 'Serviço indisponível');
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || 'Serviço indisponível');
       }
 
       setSubmitted(true);
