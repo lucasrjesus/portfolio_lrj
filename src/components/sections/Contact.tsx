@@ -61,34 +61,29 @@ export function Contact() {
     setLoading(true);
     
     try {
-      // Usando Web3Forms como alternativa confiável, pois o FormSubmit.co está fora do ar
-      const response = await fetch('https://api.web3forms.com/submit', {
+      const response = await fetch('https://formspree.io/f/3f592411-b39a-42db-bf5f-023d0d4d90b0', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
         body: JSON.stringify({
-          // IMPORTANTE: O usuário precisa substituir esta chave!
-          access_key: 'COLOQUE_SUA_CHAVE_AQUI',
           name: form.name,
           email: form.email,
           message: form.message,
-          subject: `Novo contato de ${form.name} via Portfólio`,
-          from_name: 'Portfólio Lucas Jesus'
         })
       });
 
       const data = await response.json();
 
-      if (!response.ok || !data.success) {
-        throw new Error(data.message || 'Serviço indisponível');
+      if (!response.ok) {
+        throw new Error(data?.errors?.[0]?.message || 'Serviço indisponível');
       }
 
       setSubmitted(true);
     } catch (error) {
       console.error('Erro ao enviar email:', error);
-      alert('Não foi possível enviar a mensagem automaticamente. Lembre-se de colocar sua chave do Web3Forms no código!');
+      alert('Não foi possível enviar a mensagem. Por favor, tente novamente mais tarde.');
     } finally {
       setLoading(false);
     }
