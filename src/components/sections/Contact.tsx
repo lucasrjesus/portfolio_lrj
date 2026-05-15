@@ -60,12 +60,28 @@ export function Contact() {
     
     setLoading(true);
     
-    // TODO: Substituir por chamada real à API NestJS ou EmailJS:
-    // await fetch('/api/contact', { method: 'POST', body: JSON.stringify(form) })
-    await new Promise(res => setTimeout(res, 1200)); // simula delay
-    
-    setLoading(false);
-    setSubmitted(true);
+    try {
+      await fetch('https://formsubmit.co/ajax/lrj.lucasribeiro@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          Nome: form.name,
+          Email: form.email,
+          Mensagem: form.message,
+          _subject: `Novo contato de ${form.name} via Portfólio`,
+          _template: 'box'
+        })
+      });
+      setSubmitted(true);
+    } catch (error) {
+      console.error('Erro ao enviar:', error);
+      alert('Ocorreu um erro ao enviar a mensagem. Por favor, tente novamente ou me chame no LinkedIn.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
