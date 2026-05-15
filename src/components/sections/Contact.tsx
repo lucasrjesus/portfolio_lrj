@@ -61,24 +61,18 @@ export function Contact() {
     setLoading(true);
     
     try {
-      await fetch('https://formsubmit.co/ajax/lrj.lucasribeiro@gmail.com', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          Nome: form.name,
-          Email: form.email,
-          Mensagem: form.message,
-          _subject: `Novo contato de ${form.name} via Portfólio`,
-          _template: 'box'
-        })
-      });
+      // O serviço formsubmit.co está fora do ar, usando fallback para mailto
+      const subject = encodeURIComponent(`Contato de ${form.name} pelo Portfólio`);
+      const body = encodeURIComponent(`Nome: ${form.name}\nEmail: ${form.email}\n\nMensagem:\n${form.message}`);
+      window.location.href = `mailto:lrj.lucasribeiro@gmail.com?subject=${subject}&body=${body}`;
+      
+      // Simula um pequeno tempo de carregamento para a UI
+      await new Promise(resolve => setTimeout(resolve, 800));
+      
       setSubmitted(true);
     } catch (error) {
-      console.error('Erro ao enviar:', error);
-      alert('Ocorreu um erro ao enviar a mensagem. Por favor, tente novamente ou me chame no LinkedIn.');
+      console.error('Erro ao abrir cliente de email:', error);
+      alert('Não foi possível abrir seu cliente de e-mail. Por favor, me chame no LinkedIn.');
     } finally {
       setLoading(false);
     }
