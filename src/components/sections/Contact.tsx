@@ -208,29 +208,44 @@ export function Contact() {
               )}
             </div>
 
-            {/* Submit */}
-            <button
-              ref={btnRef}
-              type="submit"
-              id="contact-submit"
-              disabled={loading}
-              className="flex items-center gap-3 text-sm font-mono text-[var(--text-primary)] border-b border-[var(--border)] pb-1 hover:border-[var(--text-primary)] transition-colors group disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {loading ? (
-                <>
-                  <span className="w-3 h-3 border border-current border-t-transparent rounded-full animate-spin" />
-                  Enviando...
-                </>
-              ) : (
-                <>
-                  Enviar mensagem
-                  <ArrowRight
-                    size={14}
-                    className="group-hover:translate-x-1 transition-transform"
-                  />
-                </>
-              )}
-            </button>
+            {/* Submit e LinkedIn */}
+            <div className="flex items-center gap-8">
+              <button
+                ref={btnRef}
+                type="submit"
+                id="contact-submit"
+                disabled={loading}
+                className="flex items-center gap-3 text-sm font-mono text-[var(--text-primary)] border-b border-[var(--border)] pb-1 hover:border-[var(--text-primary)] transition-colors group disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {loading ? (
+                  <>
+                    <span className="w-3 h-3 border border-current border-t-transparent rounded-full animate-spin" />
+                    Enviando...
+                  </>
+                ) : (
+                  <>
+                    Enviar mensagem
+                    <ArrowRight
+                      size={14}
+                      className="group-hover:translate-x-1 transition-transform"
+                    />
+                  </>
+                )}
+              </button>
+
+              <a
+                href="https://www.linkedin.com/in/lucasrjesuss"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-sm font-mono text-[var(--text-muted)] border-b border-transparent pb-1 hover:border-[var(--text-muted)] transition-all"
+              >
+                LinkedIn
+                <ArrowRight
+                  size={14}
+                  className="-rotate-45"
+                />
+              </a>
+            </div>
           </form>
         )}
 
