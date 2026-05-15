@@ -2,7 +2,6 @@
 // Navegação minimalista com dark mode toggle
 import { useEffect, useState } from 'react';
 import { Sun, Moon } from 'lucide-react';
-import { GithubIcon } from '../ui/Icons';
 import type { Theme } from '../../types';
 
 interface NavbarProps {
@@ -65,15 +64,6 @@ export function Navbar({ theme, onToggleTheme }: NavbarProps) {
 
         {/* Ações */}
         <div className="flex items-center gap-4">
-          <a
-            href="https://github.com/lucasrjesus"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Perfil GitHub"
-            className="text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors"
-          >
-            <GithubIcon size={16} />
-          </a>
           <button
             onClick={onToggleTheme}
             aria-label={`Alternar para modo ${theme === 'dark' ? 'claro' : 'escuro'}`}
